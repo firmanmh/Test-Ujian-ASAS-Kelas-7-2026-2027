@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Ujian Informatika Kelas VII</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body, html {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f1f5f9;
+    }
+
+    /* Bilah Peringatan Pengawas di Bagian Atas */
+    .top-notice {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 38px;
+      background: #0f766e;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      z-index: 1000;
+      padding: 0 12px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Area Ujian Form Presenter + Timer */
+    iframe {
+      position: absolute;
+      top: 38px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 38px);
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-notice">
+    ⚠️ Ujian Informatika Kelas VII: Dilarang menutup halaman atau membuka aplikasi lain (Otomatis Reset).
+  </div>
+
+  <!-- Ganti PASTE_LINK_FORM_PRESENTER_KELAS7_DI_SINI dengan link dari Form Presenter + Timer kelas 7 -->
+  <iframe 
+    id="examFrame" 
+    src="https://cloud.appiworks.com/form/p/urbane-soda-335bd801" 
+    allow="camera; microphone; fullscreen">
+    Memuat Halaman Ujian Kelas VII...
+  </iframe>
+
+  <script>
+    const frame = document.getElementById('examFrame');
+    const urlAsli = frame.src;
+    let sedangReset = false;
+
+    function refreshDanHapusJawaban() {
+      if (sedangReset) return;
+      sedangReset = true;
+
+      alert("PERINGATAN!\nAnda terdeteksi keluar dari halaman ujian atau membuka aplikasi lain.\nHalaman akan dimuat ulang dan pilihan jawaban yang belum dikirim akan terhapus.");
+      
+      // Memuat ulang iframe ke URL awal untuk menghapus pilihan jawaban sementara
+      frame.src = "";
+      setTimeout(() => {
+        frame.src = urlAsli;
+        sedangReset = false;
+      }, 300);
+    }
+
+    // 1. Deteksi jika siswa pindah tab, menekan tombol Home HP, atau membuka aplikasi lain
+    document.addEventListener("visibilitychange", function() {
+      if (document.hidden) {
+        refreshDanHapusJawaban();
+      }
+    });
+
+    // 2. Deteksi jika jendela browser kehilangan fokus (split-screen / pop-up aplikasi lain)
+    window.addEventListener("blur", function() {
+      refreshDanHapusJawaban();
+    });
+  </script>
+</body>
+</html>
