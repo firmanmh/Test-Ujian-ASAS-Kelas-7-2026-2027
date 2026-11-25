@@ -50,44 +50,14 @@
     ⚠️ Ujian Informatika Kelas VII: Dilarang menutup halaman atau membuka aplikasi lain (Otomatis Reset).
   </div>
 
-  <!-- Ganti PASTE_LINK_FORM_PRESENTER_KELAS7_DI_SINI dengan link dari Form Presenter + Timer kelas 7 -->
+  <!-- Disarankan mengganti src di bawah dengan link panjang Google Form kelas 7 (akhiran /viewform?embedded=true) -->
   <iframe 
     id="examFrame" 
-    src="https://forms.gle/T73dpQ1LrWaYTW2M9" 
+    src="https://docs.google.com/forms/d/e/1FAIpQLSfqpYIkYyyWT0XIPu_GTdADw3fl5gylcr7hK4FAdbRkJ4SLlg/viewform?embedded=true" 
     allow="camera; microphone; fullscreen">
     Memuat Halaman Ujian Kelas VII...
   </iframe>
 
   <script>
     const frame = document.getElementById('examFrame');
-    const urlAsli = frame.src;
-    let sedangReset = false;
-
-    function refreshDanHapusJawaban() {
-      if (sedangReset) return;
-      sedangReset = true;
-
-      alert("PERINGATAN!\nAnda terdeteksi keluar dari halaman ujian atau membuka aplikasi lain.\nHalaman akan dimuat ulang dan pilihan jawaban yang belum dikirim akan terhapus.");
-      
-      // Memuat ulang iframe ke URL awal untuk menghapus pilihan jawaban sementara
-      frame.src = "";
-      setTimeout(() => {
-        frame.src = urlAsli;
-        sedangReset = false;
-      }, 300);
-    }
-
-    // 1. Deteksi jika siswa pindah tab, menekan tombol Home HP, atau membuka aplikasi lain
-    document.addEventListener("visibilitychange", function() {
-      if (document.hidden) {
-        refreshDanHapusJawaban();
-      }
-    });
-
-    // 2. Deteksi jika jendela browser kehilangan fokus (split-screen / pop-up aplikasi lain)
-    window.addEventListener("blur", function() {
-      refreshDanHapusJawaban();
-    });
-  </script>
-</body>
-</html>
+    const url
